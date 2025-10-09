@@ -1,3 +1,4 @@
+import { DashboardHeader } from '@/components/DashboardHeader'
 import { DashboardLayoutClient } from '@/components/DashboardLayoutClient'
 import { authOptions } from '@/lib/auth'
 import { StoreProvider } from '@/lib/contexts/StoreContext'
