@@ -1,4 +1,6 @@
 import { SessionProvider } from '@/components/providers/SessionProvider'
+import { NavigationProgress } from '@/components/NavigationProgress'
+import { NavigationEvents } from '@/components/NavigationEvents'
 import '@/styles/globals.css'
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
@@ -19,6 +21,8 @@ export default function RootLayout({
     <html lang="pt-BR" suppressHydrationWarning>
       <body className={inter.className} suppressHydrationWarning>
         <SessionProvider>
+          <NavigationProgress />
+          <NavigationEvents />
           {children}
         </SessionProvider>
       </body>
