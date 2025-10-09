@@ -6,8 +6,12 @@ export const createStoreSchema = z.object({
     .string()
     .min(1, 'Slug é obrigatório')
     .max(50, 'Slug muito longo')
-    .regex(/^[a-z0-9-]+$/, 'Slug deve conter apenas letras minúsculas, números e hífens'),
+    .regex(
+      /^[a-z0-9-]+$/,
+      'Slug deve conter apenas letras minúsculas, números e hífens'
+    ),
   description: z.string().max(500, 'Descrição muito longa').optional(),
+  logo: z.string().optional(), // Base64 da imagem otimizada
   theme: z
     .object({
       primaryColor: z.string().optional(),

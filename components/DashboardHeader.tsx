@@ -1,5 +1,6 @@
 'use client'
 
+import { ThemeToggle } from '@/components/ThemeToggle'
 import { Button } from '@/components/ui/button'
 import { useStore } from '@/lib/contexts/StoreContext'
 import { ExternalLink, LogOut } from 'lucide-react'
@@ -10,26 +11,27 @@ export function DashboardHeader() {
   const { store } = useStore()
 
   return (
-    <header className="bg-white border-b shadow-sm">
+    <header className="border-b bg-background">
       <div className="container mx-auto px-4 py-4 flex items-center justify-between">
         <div className="flex items-center space-x-2">
-          <div className="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center">
-            <span className="text-white font-bold text-sm">SL</span>
+          <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
+            <span className="text-primary-foreground font-bold text-sm">SL</span>
           </div>
-          <span className="font-bold text-xl">SimpleLink</span>
+          <span className="font-bold text-xl text-foreground">SimpleLink</span>
         </div>
         
-        <div className="flex items-center space-x-4">
+        <div className="flex items-center space-x-2">
           {store?.slug && (
             <Link 
               href={`/loja/${store.slug}`}
               target="_blank"
-              className="text-gray-600 hover:text-gray-900 flex items-center"
+              className="text-muted-foreground hover:text-foreground flex items-center transition-colors"
             >
               <ExternalLink className="w-4 h-4 mr-1" />
-              Ver Loja Pública
+              <span className="hidden sm:inline">Ver Loja Pública</span>
             </Link>
           )}
+          <ThemeToggle />
           <Button
             variant="ghost"
             onClick={() => signOut({ callbackUrl: '/login' })}

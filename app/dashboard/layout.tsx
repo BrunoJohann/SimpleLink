@@ -2,6 +2,7 @@ import { DashboardHeader } from '@/components/DashboardHeader'
 import { DashboardLayoutClient } from '@/components/DashboardLayoutClient'
 import { authOptions } from '@/lib/auth'
 import { StoreProvider } from '@/lib/contexts/StoreContext'
+import { ThemeProvider } from '@/lib/contexts/ThemeContext'
 import { storeRepo } from '@/lib/repos/store'
 import { getServerSession } from 'next-auth'
 import { redirect } from 'next/navigation'
@@ -31,13 +32,15 @@ export default async function DashboardLayout({
   }
 
   return (
-    <StoreProvider store={{ id: store.id, slug: store.slug, name: store.name }}>
-      <div className="min-h-screen bg-gray-50">
-        <DashboardHeader />
-        <DashboardLayoutClient>
-          {children}
-        </DashboardLayoutClient>
-      </div>
-    </StoreProvider>
+    <ThemeProvider>
+      <StoreProvider store={{ id: store.id, slug: store.slug, name: store.name }}>
+        <div className="min-h-screen bg-background">
+          <DashboardHeader />
+          <DashboardLayoutClient>
+            {children}
+          </DashboardLayoutClient>
+        </div>
+      </StoreProvider>
+    </ThemeProvider>
   )
 }

@@ -2,6 +2,17 @@ import { prisma } from '@/lib/prisma'
 import { CreateStoreInput, UpdateStoreInput } from '@/lib/validation/store'
 
 export const storeRepo = {
+  async findById(id: string) {
+    return prisma.store.findUnique({
+      where: { id },
+      include: {
+        owner: {
+          select: { id: true, name: true, email: true, image: true },
+        },
+      },
+    })
+  },
+
   async findBySlug(slug: string) {
     return prisma.store.findUnique({
       where: { slug },
@@ -33,6 +44,7 @@ export const storeRepo = {
         name: data.name,
         slug: data.slug,
         description: data.description,
+        logo: data.logo,
         theme: data.theme,
         ownerId: data.ownerId,
       },
@@ -46,6 +58,7 @@ export const storeRepo = {
         name: data.name,
         slug: data.slug,
         description: data.description,
+        logo: data.logo,
         theme: data.theme,
       },
     })

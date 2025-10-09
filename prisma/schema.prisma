@@ -64,6 +64,7 @@ model Store {
     name               String
     slug               String    @unique
     description        String?
+    logo               String?   @db.Text
     theme              Json?
     isSubdomainEnabled Boolean   @default(false)
     products           Product[]

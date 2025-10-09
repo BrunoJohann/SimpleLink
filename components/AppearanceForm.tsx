@@ -1,9 +1,11 @@
 'use client'
 
+import { LogoUpload } from '@/components/LogoUpload'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
+import { useToast } from '@/hooks/use-toast'
 import { updateStoreSchema, type UpdateStoreInput } from '@/lib/validation/store'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Store } from '@prisma/client'
@@ -13,14 +15,13 @@ import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 
 interface AppearanceFormProps {
-  store: Store
+  readonly store: Store
 }
 
 export function AppearanceForm({ store }: AppearanceFormProps) {
   const router = useRouter()
+  const { toast } = useToast()
   const [isLoading, setIsLoading] = useState(false)
-  const [error, setError] = useState('')
-  const [success, setSuccess] = useState('')
 
   const theme = (store.theme as any) || {}
 
@@ -36,6 +37,7 @@ export function AppearanceForm({ store }: AppearanceFormProps) {
       name: store.name,
       slug: store.slug,
       description: store.description || '',
+      logo: store.logo || '',
       theme: {
         primaryColor: theme.primaryColor || '#3b82f6',
         layout: theme.layout || 'grid',
@@ -48,8 +50,6 @@ export function AppearanceForm({ store }: AppearanceFormProps) {
 
   const onSubmit = async (data: UpdateStoreInput) => {
     setIsLoading(true)
-    setError('')
-    setSuccess('')
 
     try {
       const response = await fetch(`/api/stores/${store.id}`, {
@@ -59,16 +59,29 @@ export function AppearanceForm({ store }: AppearanceFormProps) {
       })
 
       if (!response.ok) {
-        throw new Error('Erro ao atualizar loja')
+        const errorData = await response.json()
+        throw new Error(errorData.error || 'Erro ao atualizar loja')
       }
 
-      setSuccess('Configurações salvas com sucesso!')
+      console.log('🎉 Chamando toast de sucesso...')
+      const toastResult = toast({
+        variant: 'success',
+        title: '✅ Sucesso!',
+        description: 'Configurações salvas com sucesso!',
+      })
+      console.log('🎉 Toast criado:', toastResult)
       
       setTimeout(() => {
         router.refresh()
-      }, 1500)
+      }, 1000)
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Erro inesperado')
+      console.log('❌ Chamando toast de erro...')
+      toast({
+        variant: 'destructive',
+        title: '❌ Erro',
+        description: err instanceof Error ? err.message : 'Erro inesperado ao salvar',
+      })
+      console.log('❌ Toast de erro criado')
     } finally {
       setIsLoading(false)
     }
@@ -129,12 +142,17 @@ export function AppearanceForm({ store }: AppearanceFormProps) {
                 {...register('description')}
                 placeholder="Descreva sua loja..."
                 rows={3}
-                className="flex min-h-[80px] w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+                className="flex min-h-[80px] w-full rounded-md border border-input bg-background px-3 py-2 text-sm text-foreground ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
               />
               {errors.description && (
                 <p className="text-sm text-red-600 mt-1">{errors.description.message}</p>
               )}
             </div>
+
+            <LogoUpload
+              currentLogo={watch('logo') || null}
+              onLogoChange={(logo) => setValue('logo', logo || '')}
+            />
           </CardContent>
         </Card>
 
@@ -270,10 +288,20 @@ export function AppearanceForm({ store }: AppearanceFormProps) {
               }}
             >
               <div className="flex items-center space-x-3">
-                <div 
-                  className="w-12 h-12 rounded-full"
-                  style={{ backgroundColor: watchedTheme?.primaryColor || '#3b82f6' }}
-                />
+                {watch('logo') ? (
+                  <img
+                    src={watch('logo') || ''}
+                    alt="Logo"
+                    className="w-12 h-12 rounded-lg object-cover border"
+                  />
+                ) : (
+                  <div 
+                    className="w-12 h-12 rounded-lg flex items-center justify-center text-white font-bold"
+                    style={{ backgroundColor: watchedTheme?.primaryColor || '#3b82f6' }}
+                  >
+                    {(watch('name') || 'M').charAt(0).toUpperCase()}
+                  </div>
+                )}
                 <div>
                   <h3 className="font-bold text-lg">{watch('name') || 'Minha Loja'}</h3>
                   <p className="text-sm opacity-75">
@@ -312,18 +340,6 @@ export function AppearanceForm({ store }: AppearanceFormProps) {
             </div>
           </CardContent>
         </Card>
-
-        {error && (
-          <div className="bg-red-50 border border-red-200 rounded-lg p-4">
-            <p className="text-red-800">{error}</p>
-          </div>
-        )}
-
-        {success && (
-          <div className="bg-green-50 border border-green-200 rounded-lg p-4">
-            <p className="text-green-800">{success}</p>
-          </div>
-        )}
 
         <div className="flex justify-end">
           <Button type="submit" disabled={isLoading}>

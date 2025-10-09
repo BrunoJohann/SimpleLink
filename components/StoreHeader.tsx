@@ -22,11 +22,11 @@ export function StoreHeader({ store }: StoreHeaderProps) {
     >
       <div className="container mx-auto px-4 py-8">
         <div className="flex items-center space-x-4">
-          {store.owner.image && (
+          {store.logo && (
             <img
-              src={store.owner.image}
-              alt={store.owner.name || 'Avatar'}
-              className="w-16 h-16 rounded-full object-cover"
+              src={store.logo}
+              alt={store.name}
+              className="w-16 h-16 rounded-lg object-cover border-2 border-gray-200"
             />
           )}
           <div>

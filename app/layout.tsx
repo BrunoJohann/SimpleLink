@@ -1,6 +1,7 @@
-import { SessionProvider } from '@/components/providers/SessionProvider'
-import { NavigationProgress } from '@/components/NavigationProgress'
 import { NavigationEvents } from '@/components/NavigationEvents'
+import { NavigationProgress } from '@/components/NavigationProgress'
+import { SessionProvider } from '@/components/providers/SessionProvider'
+import { Toaster } from '@/components/ui/toaster'
 import '@/styles/globals.css'
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
@@ -15,7 +16,7 @@ export const metadata: Metadata = {
 export default function RootLayout({
   children,
 }: {
-  children: React.ReactNode
+  readonly children: React.ReactNode
 }) {
   return (
     <html lang="pt-BR" suppressHydrationWarning>
@@ -24,6 +25,7 @@ export default function RootLayout({
           <NavigationProgress />
           <NavigationEvents />
           {children}
+          <Toaster />
         </SessionProvider>
       </body>
     </html>
