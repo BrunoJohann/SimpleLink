@@ -10,6 +10,7 @@ import { createProductSchema, updateAffiliateLinksSchema, type AffiliateLinkInpu
 import { zodResolver } from '@hookform/resolvers/zod'
 import { AffiliateLink, Product } from '@prisma/client'
 import { Plus, Trash2 } from 'lucide-react'
+import { useTranslations } from 'next-intl'
 import { useRouter } from 'next/navigation'
 import { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
@@ -24,6 +25,7 @@ interface ProductFormProps {
 
 export function ProductForm({ storeId, product }: ProductFormProps) {
   const router = useRouter()
+  const t = useTranslations('dashboard.products.form')
   const [isLoading, setIsLoading] = useState(false)
   const [links, setLinks] = useState<AffiliateLinkInput[]>([])
   const [error, setError] = useState('')
@@ -114,7 +116,7 @@ export function ProductForm({ storeId, product }: ProductFormProps) {
         })
 
         if (!response.ok) {
-          throw new Error('Erro ao atualizar produto')
+          throw new Error(t('messages.updateError'))
         }
 
         productId = product.id
@@ -128,7 +130,7 @@ export function ProductForm({ storeId, product }: ProductFormProps) {
 
         if (!response.ok) {
           const errorData = await response.json()
-          throw new Error(errorData.error || 'Erro ao criar produto')
+          throw new Error(errorData.error || t('messages.createError'))
         }
 
         const result = await response.json()
@@ -143,16 +145,16 @@ export function ProductForm({ storeId, product }: ProductFormProps) {
       })
 
       if (!linksResponse.ok) {
-        throw new Error('Erro ao atualizar links')
+        throw new Error(t('messages.linksError'))
       }
 
-      setSuccess(isEditing ? 'Produto atualizado com sucesso!' : 'Produto criado com sucesso!')
+      setSuccess(isEditing ? t('messages.updateSuccess') : t('messages.createSuccess'))
       
       setTimeout(() => {
         router.push('/dashboard/products')
       }, 1500)
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Erro inesperado')
+      setError(err instanceof Error ? err.message : t('messages.unexpectedError'))
     } finally {
       setIsLoading(false)
     }
@@ -162,25 +164,25 @@ export function ProductForm({ storeId, product }: ProductFormProps) {
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
       <Tabs defaultValue="general" className="space-y-6">
         <TabsList>
-          <TabsTrigger value="general">Geral</TabsTrigger>
-          <TabsTrigger value="links">Links de Afiliados</TabsTrigger>
+          <TabsTrigger value="general">{t('tabs.general')}</TabsTrigger>
+          <TabsTrigger value="links">{t('tabs.links')}</TabsTrigger>
         </TabsList>
 
         <TabsContent value="general" className="space-y-6">
           <Card>
             <CardHeader>
-              <CardTitle>Informações Básicas</CardTitle>
+              <CardTitle>{t('basicInfo.title')}</CardTitle>
               <CardDescription>
-                Configure as informações principais do produto
+                {t('basicInfo.description')}
               </CardDescription>
             </CardHeader>
             <CardContent className="space-y-4">
               <div>
-                <Label htmlFor="title">Título *</Label>
+                <Label htmlFor="title">{t('basicInfo.fields.title')} *</Label>
                 <Input
                   id="title"
                   {...register('title')}
-                  placeholder="Nome do produto"
+                  placeholder={t('basicInfo.fields.titlePlaceholder')}
                   onChange={(e) => {
                     register('title').onChange(e)
                     if (!isEditing) {
@@ -194,26 +196,26 @@ export function ProductForm({ storeId, product }: ProductFormProps) {
               </div>
 
               <div>
-                <Label htmlFor="slug">Slug *</Label>
+                <Label htmlFor="slug">{t('basicInfo.fields.slug')} *</Label>
                 <Input
                   id="slug"
                   {...register('slug')}
-                  placeholder="nome-do-produto"
+                  placeholder={t('basicInfo.fields.slugPlaceholder')}
                 />
                 {errors.slug && (
                   <p className="text-sm text-red-600 mt-1">{errors.slug.message}</p>
                 )}
                 <p className="text-xs text-gray-500 mt-1">
-                  URL: /loja/seu-slug/{watch('slug') || 'nome-do-produto'}
+                  {t('basicInfo.fields.slugUrl', { slug: watch('slug') || t('basicInfo.fields.slugPlaceholder') })}
                 </p>
               </div>
 
               <div>
-                <Label htmlFor="description">Descrição</Label>
+                <Label htmlFor="description">{t('basicInfo.fields.description')}</Label>
                 <textarea
                   id="description"
                   {...register('description')}
-                  placeholder="Descreva o produto..."
+                  placeholder={t('basicInfo.fields.descriptionPlaceholder')}
                   rows={4}
                   className="flex min-h-[80px] w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
                 />
@@ -223,11 +225,11 @@ export function ProductForm({ storeId, product }: ProductFormProps) {
               </div>
 
               <div>
-                <Label htmlFor="imageUrl">URL da Imagem</Label>
+                <Label htmlFor="imageUrl">{t('basicInfo.fields.imageUrl')}</Label>
                 <Input
                   id="imageUrl"
                   {...register('imageUrl')}
-                  placeholder="https://exemplo.com/imagem.jpg"
+                  placeholder={t('basicInfo.fields.imageUrlPlaceholder')}
                   type="url"
                 />
                 {errors.imageUrl && (
@@ -237,7 +239,7 @@ export function ProductForm({ storeId, product }: ProductFormProps) {
                   <div className="mt-2">
                     <img
                       src={watch('imageUrl')!}
-                      alt="Preview"
+                      alt={t('basicInfo.fields.imagePreview')}
                       className="w-32 h-32 object-cover rounded-lg border"
                       onError={(e) => {
                         e.currentTarget.style.display = 'none'
@@ -248,11 +250,11 @@ export function ProductForm({ storeId, product }: ProductFormProps) {
               </div>
 
               <div>
-                <Label htmlFor="price">Preço (R$)</Label>
+                <Label htmlFor="price">{t('basicInfo.fields.price')}</Label>
                 <Input
                   id="price"
                   {...register('price')}
-                  placeholder="99,90"
+                  placeholder={t('basicInfo.fields.pricePlaceholder')}
                   type="text"
                 />
                 {errors.price && (
@@ -266,7 +268,7 @@ export function ProductForm({ storeId, product }: ProductFormProps) {
                   checked={watchedPublished}
                   onCheckedChange={(checked) => setValue('published', checked)}
                 />
-                <Label htmlFor="published">Produto publicado</Label>
+                <Label htmlFor="published">{t('basicInfo.fields.published')}</Label>
               </div>
             </CardContent>
           </Card>
@@ -275,16 +277,16 @@ export function ProductForm({ storeId, product }: ProductFormProps) {
         <TabsContent value="links" className="space-y-6">
           <Card>
             <CardHeader>
-              <CardTitle>Links de Afiliados</CardTitle>
+              <CardTitle>{t('affiliateLinks.title')}</CardTitle>
               <CardDescription>
-                Configure os links para diferentes marketplaces
+                {t('affiliateLinks.description')}
               </CardDescription>
             </CardHeader>
             <CardContent className="space-y-4">
               {links.map((link, index) => (
                 <div key={index} className="p-4 border rounded-lg space-y-4">
                   <div className="flex items-center justify-between">
-                    <h4 className="font-medium">Link {index + 1}</h4>
+                    <h4 className="font-medium">{t('affiliateLinks.linkNumber', { number: index + 1 })}</h4>
                     <Button
                       type="button"
                       variant="ghost"
@@ -297,26 +299,26 @@ export function ProductForm({ storeId, product }: ProductFormProps) {
                   
                   <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                     <div>
-                      <Label>Marketplace</Label>
+                      <Label>{t('affiliateLinks.fields.marketplace')}</Label>
                       <Input
-                        placeholder="Ex: Amazon, Mercado Livre"
+                        placeholder={t('affiliateLinks.fields.marketplacePlaceholder')}
                         value={link.marketplace}
                         onChange={(e) => updateLink(index, 'marketplace', e.target.value)}
                       />
                     </div>
                     <div>
-                      <Label>URL *</Label>
+                      <Label>{t('affiliateLinks.fields.url')} *</Label>
                       <Input
-                        placeholder="https://..."
+                        placeholder={t('affiliateLinks.fields.urlPlaceholder')}
                         type="url"
                         value={link.url}
                         onChange={(e) => updateLink(index, 'url', e.target.value)}
                       />
                     </div>
                     <div>
-                      <Label>Nota</Label>
+                      <Label>{t('affiliateLinks.fields.note')}</Label>
                       <Input
-                        placeholder="Ex: Frete grátis"
+                        placeholder={t('affiliateLinks.fields.notePlaceholder')}
                         value={link.note}
                         onChange={(e) => updateLink(index, 'note', e.target.value)}
                       />
@@ -327,13 +329,13 @@ export function ProductForm({ storeId, product }: ProductFormProps) {
 
               <Button type="button" variant="outline" onClick={addLink}>
                 <Plus className="w-4 h-4 mr-2" />
-                Adicionar Link
+                {t('affiliateLinks.addLink')}
               </Button>
 
               {links.length === 0 && (
                 <div className="text-center py-8 text-gray-500">
-                  <p>Nenhum link de afiliado configurado.</p>
-                  <p className="text-sm">Adicione pelo menos um link para que os clientes possam comprar o produto.</p>
+                  <p>{t('affiliateLinks.noLinks.title')}</p>
+                  <p className="text-sm">{t('affiliateLinks.noLinks.description')}</p>
                 </div>
               )}
             </CardContent>
@@ -359,10 +361,10 @@ export function ProductForm({ storeId, product }: ProductFormProps) {
           variant="outline"
           onClick={() => router.push('/dashboard/products')}
         >
-          Cancelar
+          {t('buttons.cancel')}
         </Button>
         <Button type="submit" disabled={isLoading}>
-          {isLoading ? 'Salvando...' : isEditing ? 'Atualizar Produto' : 'Criar Produto'}
+          {isLoading ? t('buttons.saving') : isEditing ? t('buttons.update') : t('buttons.create')}
         </Button>
       </div>
     </form>

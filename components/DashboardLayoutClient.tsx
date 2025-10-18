@@ -6,20 +6,23 @@ import {
     Palette,
     Store
 } from 'lucide-react'
+import { useTranslations } from 'next-intl'
 import Link from 'next/link'
-
-const navigation = [
-  { name: 'Visão Geral', href: '/dashboard', icon: Store },
-  { name: 'Produtos', href: '/dashboard/products', icon: Package },
-  { name: 'Analytics', href: '/dashboard/analytics', icon: BarChart3 },
-  { name: 'Aparência', href: '/dashboard/appearance', icon: Palette },
-]
 
 export function DashboardLayoutClient({
   children,
 }: {
   children: React.ReactNode
 }) {
+  const t = useTranslations('dashboard.navigation')
+
+  const navigation = [
+    { name: t('overview'), href: '/dashboard', icon: Store },
+    { name: t('products'), href: '/dashboard/products', icon: Package },
+    { name: t('analytics'), href: '/dashboard/analytics', icon: BarChart3 },
+    { name: t('appearance'), href: '/dashboard/appearance', icon: Palette },
+  ]
+
   return (
     <div className="flex">
       {/* Sidebar */}

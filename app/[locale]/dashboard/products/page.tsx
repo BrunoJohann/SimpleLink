@@ -1,21 +1,25 @@
 import { Button } from '@/components/ui/button'
+import { Link } from '@/i18n/navigation'
 import { authOptions } from '@/lib/auth'
 import { productRepo } from '@/lib/repos/product'
 import { storeRepo } from '@/lib/repos/store'
 import { serializeProducts } from '@/lib/utils/serialize'
 import { Edit, Plus } from 'lucide-react'
 import { getServerSession } from 'next-auth'
-import Link from 'next/link'
+import { getTranslations } from 'next-intl/server'
 import { redirect } from 'next/navigation'
 
 interface ProductsPageProps {
+  params: Promise<{ locale: string }>
   searchParams: {
     q?: string
     page?: string
   }
 }
 
-export default async function ProductsPage({ searchParams }: ProductsPageProps) {
+export default async function ProductsPage({ params, searchParams }: ProductsPageProps) {
+  const { locale } = await params
+  const t = await getTranslations('dashboard.products')
   const session = await getServerSession(authOptions)
   
   if (!session?.user?.id) {
@@ -42,15 +46,15 @@ export default async function ProductsPage({ searchParams }: ProductsPageProps) 
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-3xl font-bold text-gray-900">Produtos</h1>
+          <h1 className="text-3xl font-bold text-gray-900">{t('title')}</h1>
           <p className="text-gray-600 mt-2">
-            Gerencie seus produtos e links de afiliados
+            {t('description')}
           </p>
         </div>
         <Link href="/dashboard/products/new">
           <Button>
             <Plus className="w-4 h-4 mr-2" />
-            Novo Produto
+            {t('newProduct')}
           </Button>
         </Link>
       </div>
@@ -61,15 +65,15 @@ export default async function ProductsPage({ searchParams }: ProductsPageProps) 
             <Plus className="w-12 h-12 text-gray-400" />
           </div>
           <h3 className="text-lg font-semibold text-gray-900 mb-2">
-            Nenhum produto ainda
+            {t('noProducts.title')}
           </h3>
           <p className="text-gray-600 mb-6">
-            Comece criando seu primeiro produto para sua loja.
+            {t('noProducts.description')}
           </p>
           <Link href="/dashboard/products/new">
             <Button>
               <Plus className="w-4 h-4 mr-2" />
-              Criar Primeiro Produto
+              {t('noProducts.createFirst')}
             </Button>
           </Link>
         </div>
@@ -77,10 +81,10 @@ export default async function ProductsPage({ searchParams }: ProductsPageProps) 
         <div className="bg-white rounded-lg shadow">
           <div className="px-6 py-4 border-b">
             <h2 className="text-lg font-semibold">
-              {search ? `Resultados para "${search}"` : 'Todos os produtos'}
+              {search ? t('searchResults', { query: search }) : t('allProducts')}
             </h2>
             <p className="text-sm text-gray-600">
-              {total} produto{total !== 1 ? 's' : ''} encontrado{total !== 1 ? 's' : ''}
+              {t('productsFound', { count: total })}
             </p>
           </div>
           
@@ -89,22 +93,22 @@ export default async function ProductsPage({ searchParams }: ProductsPageProps) 
               <thead className="bg-gray-50">
                 <tr>
                   <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                    Produto
+                    {t('table.product')}
                   </th>
                   <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                    Marketplace
+                    {t('table.marketplace')}
                   </th>
                   <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                    Status
+                    {t('table.status')}
                   </th>
                   <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                    Cliques
+                    {t('table.clicks')}
                   </th>
                   <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                    Criado
+                    {t('table.created')}
                   </th>
                   <th className="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
-                    Ações
+                    {t('table.actions')}
                   </th>
                 </tr>
               </thead>
@@ -122,7 +126,7 @@ export default async function ProductsPage({ searchParams }: ProductsPageProps) 
                             />
                           ) : (
                             <div className="h-12 w-12 rounded-lg bg-gray-200 flex items-center justify-center">
-                              <span className="text-gray-400 text-xs">Sem img</span>
+                              <span className="text-gray-400 text-xs">{t('noImage')}</span>
                             </div>
                           )}
                         </div>
@@ -131,7 +135,7 @@ export default async function ProductsPage({ searchParams }: ProductsPageProps) 
                             {product.title}
                           </div>
                           <div className="text-sm text-gray-500">
-                            {product.price ? `R$ ${product.price.toFixed(2).replace('.', ',')}` : 'Sem preço'}
+                            {product.price ? t('price', { price: product.price.toFixed(2).replace('.', ',') }) : t('noPrice')}
                           </div>
                         </div>
                       </div>
@@ -159,14 +163,14 @@ export default async function ProductsPage({ searchParams }: ProductsPageProps) 
                           ? 'bg-green-100 text-green-800' 
                           : 'bg-gray-100 text-gray-800'
                       }`}>
-                        {product.published ? 'Publicado' : 'Rascunho'}
+                        {product.published ? t('status.published') : t('status.draft')}
                       </span>
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
                       {product._count.clicks}
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                      {new Date(product.createdAt).toLocaleDateString('pt-BR')}
+                      {new Date(product.createdAt).toLocaleDateString(locale === 'pt-BR' ? 'pt-BR' : 'en-US')}
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                       <div className="flex items-center justify-end space-x-2">
@@ -188,20 +192,20 @@ export default async function ProductsPage({ searchParams }: ProductsPageProps) 
             <div className="px-6 py-4 border-t bg-gray-50">
               <div className="flex items-center justify-between">
                 <div className="text-sm text-gray-700">
-                  Página {page} de {pages}
+                  {t('pagination.pageOf', { current: page, total: pages })}
                 </div>
                 <div className="flex space-x-2">
                   {page > 1 && (
                     <Link href={`/dashboard/products?page=${page - 1}${search ? `&q=${search}` : ''}`}>
                       <Button variant="outline" size="sm">
-                        Anterior
+                        {t('pagination.previous')}
                       </Button>
                     </Link>
                   )}
                   {page < pages && (
                     <Link href={`/dashboard/products?page=${page + 1}${search ? `&q=${search}` : ''}`}>
                       <Button variant="outline" size="sm">
-                        Próximo
+                        {t('pagination.next')}
                       </Button>
                     </Link>
                   )}

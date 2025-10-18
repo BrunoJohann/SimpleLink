@@ -1,0 +1,361 @@
+{
+  "common": {
+    "loading": "Carregando...",
+    "error": "Erro",
+    "success": "Sucesso",
+    "cancel": "Cancelar",
+    "save": "Salvar",
+    "edit": "Editar",
+    "delete": "Excluir",
+    "confirm": "Confirmar",
+    "back": "Voltar",
+    "next": "Próximo",
+    "previous": "Anterior",
+    "close": "Fechar"
+  },
+  "navigation": {
+    "login": "Entrar",
+    "logout": "Sair",
+    "dashboard": "Dashboard",
+    "products": "Produtos",
+    "analytics": "Analytics",
+    "appearance": "Aparência",
+    "settings": "Configurações"
+  },
+  "marketing": {
+    "navigation": {
+      "login": "Entrar"
+    },
+    "hero": {
+      "title": "Crie lojas incríveis para seus produtos afiliados",
+      "titleHighlight": "produtos afiliados",
+      "description": "Transforme seus links de afiliados em uma experiência de compra profissional. Rastreie cliques, analise performance e maximize suas vendas.",
+      "getStarted": "Começar Agora",
+      "getStartedFree": "Começar Agora - Grátis",
+      "viewDemo": "Ver Demonstração"
+    },
+    "features": {
+      "title": "Tudo que você precisa para vender mais",
+      "description": "Ferramentas profissionais para criar e gerenciar sua loja de afiliados",
+      "customStore": {
+        "title": "Loja Personalizada",
+        "description": "Crie uma loja única com seu próprio domínio e identidade visual",
+        "items": [
+          "Design responsivo",
+          "Temas personalizáveis", 
+          "SEO otimizado",
+          "Carregamento rápido"
+        ]
+      },
+      "advancedTracking": {
+        "title": "Rastreamento Avançado",
+        "description": "Monitore cliques, conversões e performance em tempo real",
+        "items": [
+          "Analytics detalhados",
+          "Relatórios por marketplace",
+          "Dados de UTM",
+          "Exportação de dados"
+        ]
+      },
+      "simplifiedManagement": {
+        "title": "Gestão Simplificada",
+        "description": "Interface intuitiva para gerenciar produtos e links facilmente",
+        "items": [
+          "CRUD de produtos",
+          "Links por marketplace",
+          "Busca e filtros",
+          "Importação em lote"
+        ]
+      }
+    },
+    "cta": {
+      "title": "Pronto para começar?",
+      "description": "Crie sua primeira loja em minutos e comece a vender mais produtos afiliados hoje mesmo.",
+      "button": "Começar Grátis Agora"
+    },
+    "footer": {
+      "copyright": "© 2024 SimpleLink. Todos os direitos reservados."
+    }
+  },
+  "language": {
+    "switch": "Alterar idioma",
+    "current": "Idioma atual",
+    "select": "Selecionar idioma"
+  },
+  "login": {
+    "title": "Entre na sua conta",
+    "subtitle": "Ou",
+    "backToHome": "volte para o início",
+    "emailLogin": "Login com Email",
+    "emailDescription": "Digite seu email para receber um link de login seguro",
+    "emailLabel": "Email",
+    "emailPlaceholder": "seu@email.com",
+    "submitButton": "Enviar Link de Login",
+    "submitting": "Enviando...",
+    "successMessage": "Verifique seu email para o link de login!",
+    "errorMessage": "Erro ao enviar email. Tente novamente.",
+    "developmentNote": "Para desenvolvimento, use um serviço como",
+    "mailhogLink": "MailHog",
+    "developmentNoteEnd": "para interceptar emails."
+  },
+  "dashboard": {
+    "welcome": "Olá, {name}!",
+    "welcomeMessage": "Bem-vindo ao painel da sua loja \"{storeName}\"",
+    "header": {
+      "viewPublicStore": "Ver Loja Pública",
+      "logout": "Sair"
+    },
+    "navigation": {
+      "overview": "Visão Geral",
+      "products": "Produtos",
+      "analytics": "Analytics",
+      "appearance": "Aparência"
+    },
+    "stats": {
+      "totalProducts": "Total de Produtos",
+      "clicks7Days": "Cliques (7 dias)",
+      "topMarketplace": "Marketplace Top",
+      "storeActive": "Loja Ativa",
+      "noProductsYet": "Nenhum produto ainda",
+      "productsRegistered": "{count} produtos cadastrados",
+      "noClicksYet": "Nenhum clique ainda",
+      "clicksRegistered": "{count} cliques registrados",
+      "viewPublicStore": "Ver loja pública"
+    },
+    "recentProducts": {
+      "title": "Produtos Recentes",
+      "description": "Seus produtos mais recentes",
+      "noProducts": "Nenhum produto ainda",
+      "noProductsDescription": "Comece criando seu primeiro produto para sua loja.",
+      "createProduct": "Criar Produto",
+      "marketplaces": "{count} marketplace{plural}",
+      "published": "Publicado",
+      "draft": "Rascunho",
+      "edit": "Editar",
+      "viewAll": "Ver todos os produtos"
+    },
+    "recentActivity": {
+      "title": "Atividade Recente",
+      "description": "Cliques dos últimos 7 dias",
+      "noClicks": "Nenhum clique ainda",
+      "noClicksDescription": "Os cliques aparecerão aqui conforme as pessoas visitam seus produtos.",
+      "clicks": "{count} cliques",
+      "viewFullAnalytics": "Ver analytics completo"
+    },
+    "products": {
+      "title": "Produtos",
+      "description": "Gerencie seus produtos e links de afiliados",
+      "newProduct": "Novo Produto",
+      "noProducts": {
+        "title": "Nenhum produto ainda",
+        "description": "Comece criando seu primeiro produto para sua loja.",
+        "createFirst": "Criar Primeiro Produto"
+      },
+      "searchResults": "Resultados para \"{query}\"",
+      "allProducts": "Todos os produtos",
+      "productsFound": "{count} produto{count, plural, =1 {} other {s}} encontrado{count, plural, =1 {} other {s}}",
+      "noImage": "Sem img",
+      "noPrice": "Sem preço",
+      "price": "R$ {price}",
+      "status": {
+        "published": "Publicado",
+        "draft": "Rascunho"
+      },
+      "table": {
+        "product": "Produto",
+        "marketplace": "Marketplace",
+        "status": "Status",
+        "clicks": "Cliques",
+        "created": "Criado",
+        "actions": "Ações"
+      },
+      "pagination": {
+        "pageOf": "Página {current} de {total}",
+        "previous": "Anterior",
+        "next": "Próximo"
+      },
+      "new": {
+        "title": "Novo Produto",
+        "description": "Adicione um novo produto à sua loja"
+      },
+      "edit": {
+        "title": "Editar Produto",
+        "description": "Edite as informações do produto \"{productTitle}\""
+      },
+      "form": {
+        "tabs": {
+          "general": "Geral",
+          "links": "Links de Afiliados"
+        },
+        "basicInfo": {
+          "title": "Informações Básicas",
+          "description": "Configure as informações principais do produto",
+          "fields": {
+            "title": "Título",
+            "titlePlaceholder": "Nome do produto",
+            "slug": "Slug",
+            "slugPlaceholder": "nome-do-produto",
+            "slugUrl": "URL: /loja/seu-slug/{slug}",
+            "description": "Descrição",
+            "descriptionPlaceholder": "Descreva o produto...",
+            "imageUrl": "URL da Imagem",
+            "imageUrlPlaceholder": "https://exemplo.com/imagem.jpg",
+            "imagePreview": "Preview",
+            "price": "Preço (R$)",
+            "pricePlaceholder": "99,90",
+            "published": "Produto publicado"
+          }
+        },
+        "affiliateLinks": {
+          "title": "Links de Afiliados",
+          "description": "Configure os links para diferentes marketplaces",
+          "linkNumber": "Link {number}",
+          "fields": {
+            "marketplace": "Marketplace",
+            "marketplacePlaceholder": "Ex: Amazon, Mercado Livre",
+            "url": "URL",
+            "urlPlaceholder": "https://...",
+            "note": "Nota",
+            "notePlaceholder": "Ex: Frete grátis"
+          },
+          "addLink": "Adicionar Link",
+          "noLinks": {
+            "title": "Nenhum link de afiliado configurado.",
+            "description": "Adicione pelo menos um link para que os clientes possam comprar o produto."
+          }
+        },
+        "buttons": {
+          "cancel": "Cancelar",
+          "saving": "Salvando...",
+          "update": "Atualizar Produto",
+          "create": "Criar Produto"
+        },
+        "messages": {
+          "updateSuccess": "Produto atualizado com sucesso!",
+          "createSuccess": "Produto criado com sucesso!",
+          "updateError": "Erro ao atualizar produto",
+          "createError": "Erro ao criar produto",
+          "linksError": "Erro ao atualizar links",
+          "unexpectedError": "Erro inesperado"
+        }
+      }
+    },
+    "analytics": {
+      "title": "Analytics",
+      "description": "Acompanhe o desempenho da sua loja",
+      "overview": {
+        "totalClicks": "Total de Cliques",
+        "last30Days": "Últimos 30 dias",
+        "clicks7Days": "Cliques (7 dias)",
+        "last7Days": "Últimos 7 dias",
+        "activeProducts": "Produtos Ativos",
+        "withClicks": "Com cliques registrados"
+      },
+      "charts": {
+        "clicksByDay": {
+          "title": "Cliques por Dia",
+          "description": "Evolução dos cliques nos últimos 30 dias"
+        },
+        "topMarketplaces": {
+          "title": "Top Marketplaces",
+          "description": "Marketplaces com mais cliques",
+          "noClicks": "Nenhum clique registrado ainda",
+          "clicks": "{count} cliques"
+        }
+      },
+      "topProducts": {
+        "title": "Produtos Mais Clicados",
+        "description": "Produtos com maior engajamento",
+        "noProducts": "Nenhum produto com cliques ainda",
+        "clicks": "{count} clique{plural}",
+        "price": "R$ {price}",
+        "noPrice": "Sem preço",
+        "status": {
+          "published": "Publicado",
+          "draft": "Rascunho"
+        }
+      }
+    },
+    "appearance": {
+      "title": "Aparência",
+      "description": "Personalize o visual da sua loja",
+      "form": {
+        "basicInfo": {
+          "title": "Informações Básicas",
+          "description": "Configure o nome e descrição da sua loja",
+          "fields": {
+            "storeName": "Nome da Loja",
+            "storeNamePlaceholder": "Minha Loja",
+            "slug": "Slug da Loja",
+            "slugPlaceholder": "minha-loja",
+            "slugUrl": "URL: /loja/{slug}",
+            "description": "Descrição",
+            "descriptionPlaceholder": "Descreva sua loja..."
+          }
+        },
+        "theme": {
+          "title": "Tema da Loja",
+          "description": "Personalize as cores e layout da sua loja",
+          "colorPresets": "Cores Predefinidas",
+          "customColor": "Cor Personalizada",
+          "layout": {
+            "title": "Layout dos Produtos",
+            "grid": "Grid",
+            "list": "Lista"
+          },
+          "preset": {
+            "title": "Tema",
+            "light": "Claro",
+            "dark": "Escuro"
+          },
+          "headerStyle": {
+            "title": "Estilo do Cabeçalho",
+            "minimalist": "Minimalista",
+            "centered": "Centralizado"
+          },
+          "productSize": {
+            "title": "Tamanho dos Produtos",
+            "small": "Pequeno",
+            "medium": "Médio",
+            "large": "Grande"
+          },
+          "displayOptions": {
+            "title": "Opções de Exibição",
+            "showPrices": "Mostrar Preços",
+            "showDescriptions": "Mostrar Descrições",
+            "showLogo": "Mostrar Logo da Loja"
+          }
+        },
+        "preview": {
+          "title": "Preview",
+          "description": "Como sua loja aparecerá para os visitantes",
+          "loading": "Carregando...",
+          "defaultStoreName": "Minha Loja",
+          "defaultDescription": "Descrição da loja",
+          "productTitle": "Produto {number}",
+          "productDescription": "Descrição do produto",
+          "buyButton": "Comprar"
+        },
+        "colorPresets": {
+          "blue": "Azul",
+          "green": "Verde",
+          "purple": "Roxo",
+          "pink": "Rosa",
+          "orange": "Laranja",
+          "red": "Vermelho"
+        },
+        "buttons": {
+          "save": "Salvar Configurações",
+          "saving": "Salvando..."
+        },
+        "messages": {
+          "successTitle": "✅ Sucesso!",
+          "errorTitle": "❌ Erro",
+          "updateSuccess": "Configurações salvas com sucesso!",
+          "updateError": "Erro ao atualizar loja",
+          "unexpectedError": "Erro inesperado ao salvar"
+        }
+      }
+    }
+  }
+}

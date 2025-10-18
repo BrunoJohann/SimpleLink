@@ -17,9 +17,10 @@ interface StorePageProps {
 }
 
 export default async function StorePage({ params, searchParams }: StorePageProps) {
-  const { storeSlug } = params
-  const search = searchParams.q || ''
-  const page = parseInt(searchParams.page || '1')
+  const { storeSlug } = await params
+  const resolvedSearchParams = await searchParams
+  const search = resolvedSearchParams.q || ''
+  const page = parseInt(resolvedSearchParams.page || '1')
 
   const store = await storeRepo.findBySlug(storeSlug)
   if (!store) {
@@ -48,6 +49,7 @@ export default async function StorePage({ params, searchParams }: StorePageProps
             total={total}
             pages={pages}
             currentPage={page}
+            theme={store.theme}
           />
         </Suspense>
       </main>
@@ -55,8 +57,9 @@ export default async function StorePage({ params, searchParams }: StorePageProps
   )
 }
 
-export async function generateMetadata({ params }: { params: { storeSlug: string } }) {
-  const store = await storeRepo.findBySlug(params.storeSlug)
+export async function generateMetadata({ params }: { params: Promise<{ storeSlug: string }> }) {
+  const { storeSlug } = await params
+  const store = await storeRepo.findBySlug(storeSlug)
   
   if (!store) {
     return {

@@ -1,14 +1,17 @@
 'use client'
 
+import { LanguageSwitcher } from '@/components/LanguageSwitcher'
 import { ThemeToggle } from '@/components/ThemeToggle'
 import { Button } from '@/components/ui/button'
 import { useStore } from '@/lib/contexts/StoreContext'
 import { ExternalLink, LogOut } from 'lucide-react'
 import { signOut } from 'next-auth/react'
+import { useTranslations } from 'next-intl'
 import Link from 'next/link'
 
 export function DashboardHeader() {
   const { store } = useStore()
+  const t = useTranslations('dashboard.header')
 
   return (
     <header className="border-b bg-background">
@@ -28,16 +31,17 @@ export function DashboardHeader() {
               className="text-muted-foreground hover:text-foreground flex items-center transition-colors"
             >
               <ExternalLink className="w-4 h-4 mr-1" />
-              <span className="hidden sm:inline">Ver Loja Pública</span>
+              <span className="hidden sm:inline">{t('viewPublicStore')}</span>
             </Link>
           )}
+          <LanguageSwitcher />
           <ThemeToggle />
           <Button
             variant="ghost"
             onClick={() => signOut({ callbackUrl: '/login' })}
           >
             <LogOut className="w-4 h-4 mr-2" />
-            Sair
+            {t('logout')}
           </Button>
         </div>
       </div>

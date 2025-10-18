@@ -9,7 +9,8 @@ import { SearchBar } from './SearchBar'
 import { Button } from './ui/button'
 
 interface ProductListProps {
-  products: (Product & {
+  products: (Omit<Product, 'price'> & {
+    price: number | null
     links: AffiliateLink[]
     _count: {
       clicks: number
@@ -20,6 +21,7 @@ interface ProductListProps {
   total: number
   pages: number
   currentPage: number
+  theme?: any
 }
 
 export function ProductList({ 
@@ -28,7 +30,8 @@ export function ProductList({
   search, 
   total, 
   pages, 
-  currentPage 
+  currentPage,
+  theme
 }: ProductListProps) {
   const router = useRouter()
   const searchParams = useSearchParams()
@@ -103,19 +106,24 @@ export function ProductList({
             </>
           ) : (
             <>
-              {total} produto{total !== 1 ? 's' : ''} disponível{total !== 1 ? 'is' : ''}
+              {total} produto{total !== 1 ? 's' : ''} {total !== 1 ? 'disponíveis' : 'disponível'}
             </>
           )}
         </p>
       </div>
 
-      {/* Products Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+      {/* Products Grid/List */}
+      <div className={`grid gap-4 ${
+        theme?.layout === 'list' ? 'grid-cols-1' : 
+        theme?.productSize === 'small' ? 'grid-cols-2 md:grid-cols-3 lg:grid-cols-4' : 
+        theme?.productSize === 'large' ? 'grid-cols-1 md:grid-cols-2' : 'grid-cols-1 md:grid-cols-2 lg:grid-cols-3'
+      }`}>
         {products.map((product) => (
           <ProductCard
             key={product.id}
             product={product}
             storeSlug={storeSlug}
+            theme={theme}
           />
         ))}
       </div>

@@ -17,6 +17,11 @@ export const createStoreSchema = z.object({
       primaryColor: z.string().optional(),
       layout: z.enum(['grid', 'list']).optional(),
       preset: z.enum(['light', 'dim']).optional(),
+      headerStyle: z.enum(['minimalist', 'centered']).optional(),
+      productSize: z.enum(['small', 'medium', 'large']).optional(),
+      showPrices: z.boolean().optional(),
+      showDescriptions: z.boolean().optional(),
+      showLogo: z.boolean().optional(),
     })
     .optional(),
 })
