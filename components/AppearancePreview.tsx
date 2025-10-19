@@ -49,7 +49,7 @@ export function AppearancePreview() {
         <div 
           className="border rounded-lg p-6 space-y-4 min-h-[500px]"
           style={{
-            backgroundColor: theme?.preset === 'dim' ? '#1f2937' : '#ffffff',
+            backgroundColor: theme?.preset === 'dim' ? '#111827' : '#ffffff',
             color: theme?.preset === 'dim' ? '#f9fafb' : '#111827',
           }}
         >
@@ -105,7 +105,7 @@ export function AppearancePreview() {
                 }`}
                 style={{
                   borderColor: theme?.preset === 'dim' ? '#374151' : '#e5e7eb',
-                  backgroundColor: theme?.preset === 'dim' ? '#374151' : '#f9fafb',
+                  backgroundColor: theme?.preset === 'dim' ? '#1f2937' : '#f8fafc',
                 }}
               >
                 {/* Image - only for list layout */}
@@ -153,16 +153,6 @@ export function AppearancePreview() {
                       </p>
                     )}
                     
-                    <div 
-                      className={`rounded text-white flex items-center justify-center ${
-                        theme?.layout === 'list' ? 'w-20 h-6 text-sm' :
-                        theme?.productSize === 'small' ? 'w-16 h-5 text-xs' : 
-                        theme?.productSize === 'large' ? 'w-24 h-8 text-base' : 'w-20 h-6 text-sm'
-                      } ${theme?.layout === 'list' ? 'mt-0' : 'mt-2'}`}
-                      style={{ backgroundColor: theme?.primaryColor || '#3b82f6' }}
-                    >
-                      {t('buyButton')}
-                    </div>
                   </div>
                 </div>
               </div>

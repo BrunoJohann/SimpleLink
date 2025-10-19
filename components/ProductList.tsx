@@ -99,7 +99,9 @@ export function ProductList({
 
       {/* Results Info */}
       <div className="text-center">
-        <p className="text-gray-600">
+        <p style={{
+          color: theme?.preset === 'dim' ? '#d1d5db' : '#6b7280'
+        }}>
           {search ? (
             <>
               {total} produto{total !== 1 ? 's' : ''} encontrado{total !== 1 ? 's' : ''} para "{search}"

@@ -36,8 +36,15 @@ export default async function StorePage({ params, searchParams }: StorePageProps
   // Serialize products to avoid Decimal serialization issues
   const serializedProducts = serializeProducts(products)
 
+  const theme = store.theme as any
+
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div 
+      className="min-h-screen"
+      style={{
+        backgroundColor: theme?.preset === 'dim' ? '#111827' : '#ffffff'
+      }}
+    >
       <StoreHeader store={store} />
       
       <main className="container mx-auto px-4 py-8">

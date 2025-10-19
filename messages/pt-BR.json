@@ -296,8 +296,8 @@
         "theme": {
           "title": "Tema da Loja",
           "description": "Personalize as cores e layout da sua loja",
-          "colorPresets": "Cores Predefinidas",
-          "customColor": "Cor Personalizada",
+          "priceColor": "Cor dos Preços",
+          "customPriceColor": "Cor Personalizada dos Preços",
           "layout": {
             "title": "Layout dos Produtos",
             "grid": "Grid",

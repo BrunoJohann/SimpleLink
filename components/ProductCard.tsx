@@ -25,26 +25,26 @@ export function ProductCard({ product, storeSlug, theme }: ProductCardProps) {
       }`}
       style={{
         borderColor: theme?.preset === 'dim' ? '#374151' : '#e5e7eb',
-        backgroundColor: theme?.preset === 'dim' ? '#374151' : '#f9fafb',
+        backgroundColor: theme?.preset === 'dim' ? '#1f2937' : '#f8fafc',
       }}
     >
-      <Link href={`/loja/${storeSlug}/${product.slug}`} className={isListLayout ? 'flex items-center space-x-3 w-full' : ''}>
+      <Link href={`/loja/${storeSlug}/${product.slug}`} className={isListLayout ? 'flex items-center space-x-3 w-full p-3' : ''}>
         {/* Image */}
         <CardHeader className={isListLayout ? 'p-0' : 'p-0'}>
           <div className={`overflow-hidden rounded-lg ${
-            isListLayout ? 'w-16 h-16 flex-shrink-0' : 'aspect-square rounded-t-lg'
+            isListLayout ? 'w-20 h-20 flex-shrink-0' : 'aspect-square rounded-t-lg'
           }`}>
             {product.imageUrl ? (
               <img
                 src={product.imageUrl}
                 alt={product.title}
                 className={`object-cover group-hover:scale-105 transition-transform duration-200 ${
-                  isListLayout ? 'w-16 h-16' : 'w-full h-full'
+                  isListLayout ? 'w-20 h-20' : 'w-full h-full'
                 }`}
               />
             ) : (
               <div className={`bg-gray-200 flex items-center justify-center ${
-                isListLayout ? 'w-16 h-16' : 'w-full h-full'
+                isListLayout ? 'w-20 h-20' : 'w-full h-full'
               }`}>
                 <span className="text-gray-400 text-sm">Sem imagem</span>
               </div>
@@ -53,7 +53,7 @@ export function ProductCard({ product, storeSlug, theme }: ProductCardProps) {
         </CardHeader>
         
         {/* Content */}
-        <CardContent className={`${isListLayout ? 'flex-1 p-3' : 'p-4'}`}>
+        <CardContent className={`${isListLayout ? 'flex-1 p-0' : 'p-4'}`}>
           <h3 className={`font-semibold mb-2 line-clamp-2 ${
             isListLayout ? 'text-base' :
             theme?.productSize === 'small' ? 'text-sm' : 

@@ -296,8 +296,8 @@
         "theme": {
           "title": "Store Theme",
           "description": "Customize your store's colors and layout",
-          "colorPresets": "Color Presets",
-          "customColor": "Custom Color",
+          "priceColor": "Price Color",
+          "customPriceColor": "Custom Price Color",
           "layout": {
             "title": "Product Layout",
             "grid": "Grid",

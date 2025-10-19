@@ -211,7 +211,7 @@ export function AppearanceForm({ store }: AppearanceFormProps) {
           <CardContent className="space-y-6">
             {/* Color Presets */}
             <div>
-              <Label>{t('theme.colorPresets')}</Label>
+              <Label>{t('theme.priceColor')}</Label>
               <div className="grid grid-cols-3 md:grid-cols-6 gap-3 mt-2">
                 {colorPresets.map((preset) => (
                   <button
@@ -232,7 +232,7 @@ export function AppearanceForm({ store }: AppearanceFormProps) {
 
             {/* Custom Color */}
             <div>
-              <Label htmlFor="primaryColor">{t('theme.customColor')}</Label>
+              <Label htmlFor="primaryColor">{t('theme.customPriceColor')}</Label>
               <div className="flex items-center space-x-3 mt-2">
                 <Input
                   id="primaryColor"
