@@ -1,6 +1,7 @@
 'use client'
 
 import { LogoUpload } from '@/components/LogoUpload'
+import { StoreLanguageSelector } from '@/components/StoreLanguageSelector'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
@@ -128,6 +129,25 @@ export function AppearanceForm({ store }: AppearanceFormProps) {
     }
   }
 
+  const handleLanguageChange = async (language: string) => {
+    try {
+      const response = await fetch(`/api/stores/${store.id}`, {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ language }),
+      })
+
+      if (!response.ok) {
+        const errorData = await response.json()
+        throw new Error(errorData.error || 'Erro ao atualizar idioma')
+      }
+
+      router.refresh()
+    } catch (error) {
+      throw error
+    }
+  }
+
   const colorPresets = [
     { name: t('colorPresets.blue'), value: '#3b82f6' },
     { name: t('colorPresets.green'), value: '#10b981' },
@@ -196,6 +216,12 @@ export function AppearanceForm({ store }: AppearanceFormProps) {
             />
           </CardContent>
         </Card>
+
+        {/* Store Language */}
+        <StoreLanguageSelector
+          currentLanguage={store.language || 'en'}
+          onLanguageChange={handleLanguageChange}
+        />
 
         {/* Theme Settings */}
         <Card>

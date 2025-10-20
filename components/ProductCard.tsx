@@ -13,9 +13,10 @@ interface ProductCardProps {
   }
   storeSlug: string
   theme?: any
+  translations: any
 }
 
-export function ProductCard({ product, storeSlug, theme }: ProductCardProps) {
+export function ProductCard({ product, storeSlug, theme, translations }: ProductCardProps) {
   const isListLayout = theme?.layout === 'list'
   
   return (

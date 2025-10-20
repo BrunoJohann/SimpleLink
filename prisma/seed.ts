@@ -10,7 +10,8 @@ async function main() {
     create: {
       email: 'demo@example.com',
       name: 'Demo User',
-      image: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&h=100&fit=crop&crop=face',
+      image:
+        'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&h=100&fit=crop&crop=face',
     },
   })
 
@@ -23,6 +24,7 @@ async function main() {
       name: 'Demo Store',
       slug: 'demo-store',
       description: 'Uma loja de demonstração com produtos incríveis',
+      language: 'pt-BR',
       theme: {
         primaryColor: '#3b82f6',
         layout: 'grid',
@@ -36,33 +38,41 @@ async function main() {
     {
       title: 'iPhone 15 Pro Max',
       slug: 'iphone-15-pro-max',
-      description: 'O mais avançado iPhone com chip A17 Pro, câmera de 48MP e tela Super Retina XDR de 6.7".',
-      imageUrl: 'https://images.unsplash.com/photo-1695048133142-1a20484d2569?w=400&h=400&fit=crop',
-      price: 7999.00,
+      description:
+        'O mais avançado iPhone com chip A17 Pro, câmera de 48MP e tela Super Retina XDR de 6.7".',
+      imageUrl:
+        'https://images.unsplash.com/photo-1695048133142-1a20484d2569?w=400&h=400&fit=crop',
+      price: 7999.0,
       published: true,
     },
     {
       title: 'MacBook Air M2',
       slug: 'macbook-air-m2',
-      description: 'Notebook ultraportátil com chip M2, tela Liquid Retina de 13.6" e até 18h de bateria.',
-      imageUrl: 'https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=400&h=400&fit=crop',
-      price: 8999.00,
+      description:
+        'Notebook ultraportátil com chip M2, tela Liquid Retina de 13.6" e até 18h de bateria.',
+      imageUrl:
+        'https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=400&h=400&fit=crop',
+      price: 8999.0,
       published: true,
     },
     {
       title: 'AirPods Pro 2',
       slug: 'airpods-pro-2',
-      description: 'Fones sem fio com cancelamento ativo de ruído e áudio espacial personalizado.',
-      imageUrl: 'https://images.unsplash.com/photo-1606220588913-b3aacb4d2f46?w=400&h=400&fit=crop',
-      price: 2199.00,
+      description:
+        'Fones sem fio com cancelamento ativo de ruído e áudio espacial personalizado.',
+      imageUrl:
+        'https://images.unsplash.com/photo-1606220588913-b3aacb4d2f46?w=400&h=400&fit=crop',
+      price: 2199.0,
       published: true,
     },
     {
       title: 'Apple Watch Series 9',
       slug: 'apple-watch-series-9',
-      description: 'Smartwatch com chip S9, GPS e monitoramento de saúde avançado.',
-      imageUrl: 'https://images.unsplash.com/photo-1551698618-1dfe5d97d256?w=400&h=400&fit=crop',
-      price: 3299.00,
+      description:
+        'Smartwatch com chip S9, GPS e monitoramento de saúde avançado.',
+      imageUrl:
+        'https://images.unsplash.com/photo-1551698618-1dfe5d97d256?w=400&h=400&fit=crop',
+      price: 3299.0,
       published: true,
     },
   ]
@@ -114,7 +124,7 @@ async function main() {
 }
 
 main()
-  .catch((e) => {
+  .catch(e => {
     console.error(e)
     process.exit(1)
   })

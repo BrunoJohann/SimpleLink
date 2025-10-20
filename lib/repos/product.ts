@@ -210,44 +210,57 @@ export const productRepo = {
     const startDate = new Date()
     startDate.setDate(startDate.getDate() - days)
 
-    const [clicksByDay, topProducts, topMarketplaces] = await Promise.all([
-      // Clicks by day
-      prisma.clickEvent.groupBy({
-        by: ['createdAt'],
-        where: {
-          product: { storeId },
-          createdAt: { gte: startDate },
-        },
-        _count: { id: true },
-        orderBy: { createdAt: 'asc' },
-      }),
-
-      // Top products
-      prisma.product.findMany({
-        where: { storeId },
-        include: {
-          _count: {
-            select: { clicks: true },
+    const [clicksByDay, viewsByDay, topProducts, topMarketplaces] =
+      await Promise.all([
+        // Clicks by day
+        prisma.clickEvent.groupBy({
+          by: ['createdAt'],
+          where: {
+            product: { storeId },
+            createdAt: { gte: startDate },
           },
-        },
-        orderBy: { clicks: { _count: 'desc' } },
-        take: 10,
-      }),
+          _count: { id: true },
+          orderBy: { createdAt: 'asc' },
+        }),
 
-      // Top marketplaces
-      prisma.clickEvent.groupBy({
-        by: ['marketplace'],
-        where: {
-          product: { storeId },
-          createdAt: { gte: startDate },
-        },
-        _count: { id: true },
-        orderBy: { _count: { id: 'desc' } },
-      }),
-    ])
+        // Views by day
+        prisma.productView.groupBy({
+          by: ['createdAt'],
+          where: {
+            product: { storeId },
+            createdAt: { gte: startDate },
+          },
+          _count: { id: true },
+          orderBy: { createdAt: 'asc' },
+        }),
+
+        // Top products
+        prisma.product.findMany({
+          where: { storeId },
+          include: {
+            _count: {
+              select: { clicks: true, views: true },
+            },
+          },
+          orderBy: { clicks: { _count: 'desc' } },
+          take: 10,
+        }),
+
+        // Top marketplaces
+        prisma.clickEvent.groupBy({
+          by: ['marketplace'],
+          where: {
+            product: { storeId },
+            createdAt: { gte: startDate },
+          },
+          _count: { id: true },
+          orderBy: { _count: { id: 'desc' } },
+        }),
+      ])
 
     return {
       clicksByDay,
+      viewsByDay,
       topProducts,
       topMarketplaces,
     }

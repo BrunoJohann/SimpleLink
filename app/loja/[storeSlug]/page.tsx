@@ -1,5 +1,6 @@
 import { ProductList } from '@/components/ProductList'
 import { StoreHeader } from '@/components/StoreHeader'
+import { Tracking } from '@/components/Tracking'
 import { productRepo } from '@/lib/repos/product'
 import { storeRepo } from '@/lib/repos/store'
 import { serializeProducts } from '@/lib/utils/serialize'
@@ -45,6 +46,7 @@ export default async function StorePage({ params, searchParams }: StorePageProps
         backgroundColor: theme?.preset === 'dim' ? '#111827' : '#ffffff'
       }}
     >
+      <Tracking storeSlug={storeSlug} />
       <StoreHeader store={store} />
       
       <main className="container mx-auto px-4 py-8">

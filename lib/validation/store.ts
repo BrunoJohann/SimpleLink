@@ -12,6 +12,7 @@ export const createStoreSchema = z.object({
     ),
   description: z.string().max(500, 'Descrição muito longa').optional(),
   logo: z.string().optional(), // Base64 da imagem otimizada
+  language: z.enum(['en', 'pt-BR']).optional(),
   theme: z
     .object({
       primaryColor: z.string().optional(),

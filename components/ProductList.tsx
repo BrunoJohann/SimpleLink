@@ -30,7 +30,7 @@ export function ProductList({
   search, 
   total, 
   pages, 
-  currentPage,
+  currentPage, 
   theme
 }: ProductListProps) {
   const router = useRouter()

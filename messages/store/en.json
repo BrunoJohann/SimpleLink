@@ -1,0 +1,22 @@
+{
+  "store": {
+    "title": "My Store",
+    "description": "Store description",
+    "noProducts": "No products found",
+    "loading": "Loading...",
+    "search": {
+      "placeholder": "Search products...",
+      "results": "{count} product(s) found"
+    },
+    "product": {
+      "price": "Price",
+      "description": "Description",
+      "buyNow": "Buy Now",
+      "viewDetails": "View Details"
+    },
+    "categories": {
+      "all": "All",
+      "noCategory": "No category"
+    }
+  }
+}

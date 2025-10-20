@@ -58,17 +58,19 @@ model VerificationToken {
 }
 
 model Store {
-    id                 String    @id @default(cuid())
+    id                 String       @id @default(cuid())
     ownerId            String
-    owner              User      @relation(fields: [ownerId], references: [id], onDelete: Cascade)
+    owner              User         @relation(fields: [ownerId], references: [id], onDelete: Cascade)
     name               String
-    slug               String    @unique
+    slug               String       @unique
     description        String?
-    logo               String?   @db.Text
+    logo               String?      @db.Text
     theme              Json?
-    isSubdomainEnabled Boolean   @default(false)
+    language           String       @default("en")
+    isSubdomainEnabled Boolean      @default(false)
     products           Product[]
-    createdAt          DateTime  @default(now())
+    visits             StoreVisit[]
+    createdAt          DateTime     @default(now())
 
     @@unique([ownerId, slug])
 }
@@ -85,6 +87,7 @@ model Product {
     published   Boolean         @default(true)
     links       AffiliateLink[]
     clicks      ClickEvent[]
+    views       ProductView[]
     createdAt   DateTime        @default(now())
     updatedAt   DateTime        @updatedAt
 
@@ -107,6 +110,32 @@ model ClickEvent {
     productId    String
     product      Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
     marketplace  String
+    referer      String?
+    utm_source   String?
+    utm_medium   String?
+    utm_campaign String?
+    ip           String?
+    userAgent    String?
+    createdAt    DateTime @default(now())
+}
+
+model StoreVisit {
+    id           String   @id @default(cuid())
+    storeId      String
+    store        Store    @relation(fields: [storeId], references: [id], onDelete: Cascade)
+    referer      String?
+    utm_source   String?
+    utm_medium   String?
+    utm_campaign String?
+    ip           String?
+    userAgent    String?
+    createdAt    DateTime @default(now())
+}
+
+model ProductView {
+    id           String   @id @default(cuid())
+    productId    String
+    product      Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
     referer      String?
     utm_source   String?
     utm_medium   String?

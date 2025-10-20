@@ -1,0 +1,22 @@
+{
+  "store": {
+    "title": "Minha Loja",
+    "description": "Descrição da loja",
+    "noProducts": "Nenhum produto encontrado",
+    "loading": "Carregando...",
+    "search": {
+      "placeholder": "Buscar produtos...",
+      "results": "{count} produto(s) encontrado(s)"
+    },
+    "product": {
+      "price": "Preço",
+      "description": "Descrição",
+      "buyNow": "Comprar Agora",
+      "viewDetails": "Ver Detalhes"
+    },
+    "categories": {
+      "all": "Todas",
+      "noCategory": "Sem categoria"
+    }
+  }
+}

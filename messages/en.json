@@ -244,6 +244,8 @@
       "title": "Analytics",
       "description": "Track your store performance",
       "overview": {
+        "storeVisits": "Store Visits",
+        "productViews": "Product Views",
         "totalClicks": "Total Clicks",
         "last30Days": "Last 30 days",
         "clicks7Days": "Clicks (7 days)",
@@ -252,6 +254,14 @@
         "withClicks": "With recorded clicks"
       },
       "charts": {
+        "storeVisits": {
+          "title": "Store Visits by Day",
+          "description": "Visit evolution over the last 30 days"
+        },
+        "productViews": {
+          "title": "Product Views by Day",
+          "description": "View evolution over the last 30 days"
+        },
         "clicksByDay": {
           "title": "Clicks by Day",
           "description": "Click evolution over the last 30 days"
@@ -267,6 +277,7 @@
         "title": "Most Clicked Products",
         "description": "Products with highest engagement",
         "noProducts": "No products with clicks yet",
+        "views": "{count} view{plural}",
         "clicks": "{count} click{plural}",
         "price": "${price}",
         "noPrice": "No price",
@@ -326,6 +337,12 @@
             "showLogo": "Show Store Logo"
           }
         },
+        "storeLanguage": {
+          "title": "Store Language",
+          "description": "Choose the language in which your store will be displayed to visitors",
+          "currentLanguage": "Current Language",
+          "info": "The store will be displayed only in the selected language. All public store texts will follow this language."
+        },
         "preview": {
           "title": "Preview",
           "description": "How your store will appear to visitors",
@@ -352,6 +369,7 @@
           "successTitle": "✅ Success!",
           "errorTitle": "❌ Error",
           "updateSuccess": "Settings saved successfully!",
+          "languageUpdated": "Store language updated successfully!",
           "updateError": "Error updating store",
           "unexpectedError": "Unexpected error saving"
         }

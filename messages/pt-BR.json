@@ -244,6 +244,8 @@
       "title": "Analytics",
       "description": "Acompanhe o desempenho da sua loja",
       "overview": {
+        "storeVisits": "Visitas à Loja",
+        "productViews": "Visualizações de Produtos",
         "totalClicks": "Total de Cliques",
         "last30Days": "Últimos 30 dias",
         "clicks7Days": "Cliques (7 dias)",
@@ -252,6 +254,14 @@
         "withClicks": "Com cliques registrados"
       },
       "charts": {
+        "storeVisits": {
+          "title": "Visitas à Loja por Dia",
+          "description": "Evolução das visitas nos últimos 30 dias"
+        },
+        "productViews": {
+          "title": "Visualizações de Produtos por Dia",
+          "description": "Evolução das visualizações nos últimos 30 dias"
+        },
         "clicksByDay": {
           "title": "Cliques por Dia",
           "description": "Evolução dos cliques nos últimos 30 dias"
@@ -267,6 +277,7 @@
         "title": "Produtos Mais Clicados",
         "description": "Produtos com maior engajamento",
         "noProducts": "Nenhum produto com cliques ainda",
+        "views": "{count} visualizaç{plural}",
         "clicks": "{count} clique{plural}",
         "price": "R$ {price}",
         "noPrice": "Sem preço",
@@ -326,6 +337,12 @@
             "showLogo": "Mostrar Logo da Loja"
           }
         },
+        "storeLanguage": {
+          "title": "Idioma da Loja",
+          "description": "Escolha o idioma em que sua loja será exibida para os visitantes",
+          "currentLanguage": "Idioma Atual",
+          "info": "A loja será exibida apenas no idioma selecionado. Todos os textos da loja pública seguirão este idioma."
+        },
         "preview": {
           "title": "Preview",
           "description": "Como sua loja aparecerá para os visitantes",
@@ -352,6 +369,7 @@
           "successTitle": "✅ Sucesso!",
           "errorTitle": "❌ Erro",
           "updateSuccess": "Configurações salvas com sucesso!",
+          "languageUpdated": "Idioma da loja atualizado com sucesso!",
           "updateError": "Erro ao atualizar loja",
           "unexpectedError": "Erro inesperado ao salvar"
         }

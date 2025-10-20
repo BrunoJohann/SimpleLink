@@ -1,5 +1,6 @@
 import { MarketplaceButtons } from '@/components/MarketplaceButtons'
 import { StoreHeader } from '@/components/StoreHeader'
+import { Tracking } from '@/components/Tracking'
 import { productRepo } from '@/lib/repos/product'
 import { serializeProduct } from '@/lib/utils/serialize'
 import { ArrowLeft } from 'lucide-react'
@@ -27,6 +28,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
 
   return (
     <div className="min-h-screen bg-gray-50">
+      <Tracking storeSlug={storeSlug} productSlug={productSlug} />
       <StoreHeader store={product.store} />
       
       <main className="container mx-auto px-4 py-8">
